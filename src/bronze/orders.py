@@ -1,3 +1,4 @@
+# Databricks notebook source
 # =============================================================================
 # src/bronze/orders.py
 # Auto Loader: parquet z Volume → bronze_orders (Delta, append)

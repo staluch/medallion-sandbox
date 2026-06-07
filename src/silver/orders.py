@@ -1,3 +1,5 @@
+# Databricks notebook source
+
 dbutils.widgets.text("catalog", "dev_medallion", "Target catalog")
 dbutils.widgets.text("schema", "medallion", "Target schema")
 
