@@ -1,0 +1,12 @@
+variables:
+  catalog:
+    description: Nazwa katalogu Unity Catalog
+    default: dev_medallion
+
+  schema:
+    description: Schemat w katalogu
+    default: medallion
+
+  volume_path:
+    description: Ścieżka do landing zone w Volume
+    default: /Volumes/${var.catalog}/${var.schema}/landing

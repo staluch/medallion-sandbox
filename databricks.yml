@@ -1,0 +1,17 @@
+bundle:
+  name: medllion-sandbox
+
+include:
+  - variables.yml
+  - resources/*.yml
+
+targets:
+  dev:
+    mode: development
+    variables:
+      catalog: dev_medallion
+
+  prod:
+    mode: production
+    variables:
+      catalog: prod_medallion
