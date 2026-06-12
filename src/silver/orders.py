@@ -1,3 +1,4 @@
+# Databricks notebook source
 from pyspark import pipelines as dp
 from pyspark.sql.functions import col, current_timestamp, to_date, xxhash64
 from pyspark.sql.types import DecimalType
