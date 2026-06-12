@@ -4,6 +4,7 @@ resources:
       name: orders_${bundle.target}
       catalog: ${var.catalog}
       target: ${var.schema}
+      serverless: true
       channel: CURRENT
       continuous: false
       development: true
@@ -11,6 +12,6 @@ resources:
         volume_path: ${var.volume_path}
       libraries:
         - notebook:
-            path: ${workspace.file_path}/src/bronze/orders
+            path: ${workspace.file_path}/src/bronze/orders.py
         - notebook:
-            path: ${workspace.file_path}/src/silver/orders
+            path: ${workspace.file_path}/src/silver/orders.py
