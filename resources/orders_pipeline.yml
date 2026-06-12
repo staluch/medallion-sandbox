@@ -1,0 +1,16 @@
+resources:
+  pipelines:
+    orders:
+      name: orders_${bundle.target}
+      catalog: ${var.catalog}
+      target: ${var.schema}
+      channel: CURRENT
+      continuous: false
+      development: true
+      configuration:
+        volume_path: ${var.volume_path}
+      libraries:
+        - notebook:
+            path: ${workspace.file_path}/src/bronze/orders
+        - notebook:
+            path: ${workspace.file_path}/src/silver/orders
