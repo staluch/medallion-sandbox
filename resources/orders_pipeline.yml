@@ -11,7 +11,7 @@ resources:
       configuration:
         volume_path: ${var.volume_path}
       libraries:
-        - notebook:
-            path: ${workspace.file_path}/src/bronze/orders
-        - notebook:
-            path: ${workspace.file_path}/src/silver/orders
+        - file:
+            path: ${workspace.file_path}/src/bronze/orders.py
+        - file:
+            path: ${workspace.file_path}/src/silver/orders.py
