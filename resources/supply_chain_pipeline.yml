@@ -1,0 +1,27 @@
+resources:
+  pipelines:
+    supply_chain_pipeline:
+      name: supply_chain_pipeline
+      catalog: ${var.catalog}
+      schema: ${var.schema}
+      serverless: true
+      configuration:
+        landing_root: ${var.volume_path}
+        src_root: ${workspace.file_path}/src
+        catalog_name: ${var.catalog}
+        schema_name: ${var.schema}
+      libraries:
+        - file:
+           path: ../src/part/bronze_part.py
+        - file:
+           path: ../src/part/silver_part.py
+        - file:
+           path: ../src/partsupp/bronze_partsupp.py
+        - file:
+           path: ../src/partsupp/silver_partsupp.py
+        - file:
+           path: ../src/supplier/bronze_supplier.py
+        - file:
+           path: ../src/supplier/silver_supplier.py
+        - file:
+           path: ../src/gold/gold_supplier_parts.py

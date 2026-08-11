@@ -1,5 +1,5 @@
 bundle:
-  name: medllion-sandbox
+  name: medallion-sandbox
 
 include:
   - variables.yml
@@ -8,10 +8,14 @@ include:
 targets:
   dev:
     mode: development
+    presets:
+      name_prefix: '[dev ${workspace.current_user.short_name}] '
     variables:
       catalog: dev_medallion
 
   prod:
-    mode: production
+    mode: development
+    presets:
+      name_prefix: '[prod ${workspace.current_user.short_name}] '
     variables:
       catalog: prod_medallion

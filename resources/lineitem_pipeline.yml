@@ -1,15 +1,15 @@
 resources:
   pipelines:
-    orders_pipeline:
-      name: orders_pipeline
+    linetiem_pipeline:
+      name: lineitem_pipeline
       catalog: ${var.catalog}
       schema: ${var.schema}
       serverless: true
       configuration:
-        landing_volume_path: ${var.volume_path}/orders
+        landing_volume_path: ${var.volume_path}/lineitem
         src_root: ${workspace.file_path}/src
       libraries:
         - file:
-            path: ../src/orders/bronze_orders.py
+           path: ../src/lineitem/bronze_lineitem.py
         - file:
-            path: ../src/orders/silver_orders.py
+           path: ../src/lineitem/silver_lineitem.py

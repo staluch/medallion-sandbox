@@ -1,15 +1,15 @@
 resources:
   pipelines:
-    orders_pipeline:
-      name: orders_pipeline
+    nation_pipeline:
+      name: nation_pipeline
       catalog: ${var.catalog}
       schema: ${var.schema}
       serverless: true
       configuration:
-        landing_volume_path: ${var.volume_path}/orders
+        landing_volume_path: ${var.volume_path}/nation
         src_root: ${workspace.file_path}/src
       libraries:
         - file:
-            path: ../src/orders/bronze_orders.py
+           path: ../src/nation/bronze_nation.py
         - file:
-            path: ../src/orders/silver_orders.py
+           path: ../src/nation/silver_nation.py

@@ -7,14 +7,16 @@
 dbutils.widgets.text("batch_id", "1992", "Rok (1992-1998)")
 dbutils.widgets.text("catalog", "dev_medallion", "Target catalog")
 dbutils.widgets.text("schema", "medallion", "Target schema")
+dbutils.widgets.text("source", "customer", "Source table")
 
 batch_id = dbutils.widgets.get("batch_id")
 catalog = dbutils.widgets.get("catalog")
 schema = dbutils.widgets.get("schema")
+source = dbutils.widgets.get("source")
 
-volume_path = f"/Volumes/{catalog}/{schema}/landing"
+volume_path = f"/Volumes/{catalog}/{schema}/landing/{source}"
 
-print(f"Config: catalog={catalog}, schema={schema}, batch_id={batch_id}")
+print(f"Config: catalog={catalog}, schema={schema}, batch_id={batch_id}, source={source}")
 
 # ---------------------------------------------------------------------------
 # 1. Tworzenie obiektów UC (idempotentne – bezpieczne przy każdym wywołaniu)
@@ -32,10 +34,13 @@ print("UC objects: OK")
 
 from pyspark.sql.functions import year, col, to_date
 
-orders_raw = spark.table("samples.tpch.orders")
+#orders_raw = spark.table("samples.tpch.orders")
+source_raw = spark.table(f"samples.tpch.{source}")
 
-batch_df = orders_raw.filter(year(to_date(col("o_orderdate"))) == int(batch_id))
+batch_df = source_raw.filter(year(to_date(col("o_orderdate"))) == int(batch_id))
+#batch_df = source_raw
 output_dir = f"{volume_path}/batch={batch_id}"
+#output_dir = f"{volume_path}"
 
 batch_df.write.mode("overwrite").parquet(output_dir)
 

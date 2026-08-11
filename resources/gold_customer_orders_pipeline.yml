@@ -1,0 +1,13 @@
+resources:
+  pipelines:
+    gold_customer_orders_pipeline:
+      name: gold_customer_orders_pipeline
+      catalog: ${var.catalog}
+      schema: ${var.schema}
+      serverless: true
+      configuration:
+        catalog_name: ${var.catalog}
+        schema_name: ${var.schema}
+      libraries:
+        - file:
+            path: ../src/gold/gold_customer_orders.py

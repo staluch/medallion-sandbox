@@ -1,0 +1,20 @@
+resources:
+  pipelines:
+    customer_pipeline:
+      name: customer_pipeline
+      catalog: ${var.catalog}
+      schema: ${var.schema}
+      serverless: true
+      # WYMAGANE DLA TESTÓW:
+      # - channel: preview (udostępnia test_spark fixture)
+      # - continuous: false (triggered mode, nie continuous)
+      channel: preview
+      continuous: false
+      configuration:
+        landing_volume_path: ${var.volume_path}/customer
+        src_root: ${workspace.file_path}/src
+      libraries:
+        - file:
+            path: ../src/customer/bronze_customer.py
+        - file:
+            path: ../src/customer/silver_customer.py

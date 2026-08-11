@@ -1,15 +1,15 @@
 resources:
   pipelines:
-    orders_pipeline:
-      name: orders_pipeline
+    region_pipelines:
+      name: region_pipelines
       catalog: ${var.catalog}
       schema: ${var.schema}
       serverless: true
       configuration:
-        landing_volume_path: ${var.volume_path}/orders
+        landing_volume_path: ${var.volume_path}/region
         src_root: ${workspace.file_path}/src
       libraries:
         - file:
-            path: ../src/orders/bronze_orders.py
+           path: ../src/region/bronze_region.py
         - file:
-            path: ../src/orders/silver_orders.py
+           path: ../src/region/silver_region.py
