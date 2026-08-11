@@ -5,17 +5,33 @@ include:
   - variables.yml
   - resources/*.yml
 
+sync:
+  exclude:
+    - "tests/**"
+
 targets:
   dev:
     mode: development
+    default: true
     presets:
       name_prefix: '[dev ${workspace.current_user.short_name}] '
     variables:
       catalog: dev_medallion
 
+  # prod:
+    # mode: development
+    # presets:
+      # name_prefix: '[prod ${workspace.current_user.short_name}] '
+    # variables:
+      # catalog: prod_medallion
+
   prod:
-    mode: development
-    presets:
-      name_prefix: '[prod ${workspace.current_user.short_name}] '
-    variables:
-      catalog: prod_medallion
+      mode: production
+      workspace:
+        root_path: /Workspace/Shared/.bundle/${bundle.name}/${bundle.target}
+      presets:
+        name_prefix: '[prod] '
+      run_as:
+        user_name: ${workspace.current_user.userName}
+      variables:
+        catalog: prod_medallion
