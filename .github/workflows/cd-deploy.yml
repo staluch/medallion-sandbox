@@ -1,0 +1,26 @@
+name: CD - deploy prod
+
+on:
+  push:
+    branches:
+      - main
+
+concurrency:
+  group: prod-deploy
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    env:
+      DATABRICKS_HOST: ${{ secrets.DATABRICKS_HOST }}
+      DATABRICKS_TOKEN: ${{ secrets.DATABRICKS_TOKEN }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: databricks/setup-cli@main
+      - name: Walidacja
+        run: databricks bundle validate -t prod
+      - name: Deploy do prod
+        run: databricks bundle deploy -t prod
+      - name: Smoke run
+        run: databricks bundle run -t prod gold_customer_orders_refresh_job
