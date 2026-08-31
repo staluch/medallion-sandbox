@@ -1,0 +1,19 @@
+name: Deploy stg (manual test)
+on:
+  workflow_dispatch:
+concurrency:
+  group: stg-deploy
+  cancel-in-progress: false
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    env:
+      DATABRICKS_HOST: ${{ secrets.DATABRICKS_HOST }}
+      DATABRICKS_TOKEN: ${{ secrets.DATABRICKS_TOKEN }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: databricks/setup-cli@main
+      - name: Walidacja
+        run: databricks bundle validate -t stg
+      - name: Deploy do stg
+        run: databricks bundle deploy -t stg
