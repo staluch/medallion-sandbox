@@ -5,7 +5,7 @@
 # =============================================================================
 
 dbutils.widgets.text("batch_id", "1992", "Rok (1992-1998)")
-dbutils.widgets.text("catalog", "dev_medallion", "Target catalog")
+dbutils.widgets.text("catalog", "stg_medallion", "Target catalog")
 dbutils.widgets.text("schema", "medallion", "Target schema")
 dbutils.widgets.text("source", "customer", "Source table")
 
